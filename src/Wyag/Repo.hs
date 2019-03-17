@@ -3,6 +3,7 @@ module Wyag.Repo (
     Repo(..)
   , init
   , create
+  , find
 ) where
 
 import           Control.Monad.Trans.Except
@@ -84,3 +85,12 @@ createRepoDir repo dir = do
     else return (Left $ "Not a directory: " ++ dir)
   else do
     const (Right $ repo </> dir) <$> createDirectoryIfMissing True (repo </> dir)
+
+find :: IO (Either String Repo)
+find = getCurrentDirectory >>= go
+  where
+    go :: FilePath -> IO (Either String Repo)
+    go path = doesDirectoryExist (path </> ".git") >>= \isrepo ->
+                if isrepo then init path
+                else if path == "/" then return (Left "No repository here")
+                     else makeAbsolute (path </> "..") >>= go
