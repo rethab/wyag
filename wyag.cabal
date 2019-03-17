@@ -1,0 +1,84 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: d1717ae5b6660f2a8e90e8c323ed3a74b0b05f237230a9f712bee1761d6c35a4
+
+name:           wyag
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/rethab/wyag#readme>
+homepage:       https://github.com/rethab/wyag#readme
+bug-reports:    https://github.com/rethab/wyag/issues
+author:         Reto Habluetzel
+maintainer:     rethab@pm.me
+copyright:      2019 Reto Habluetzel
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/rethab/wyag
+
+library
+  exposed-modules:
+      Cmd
+      Wyag.Init
+      Wyag.Repo
+  other-modules:
+      Paths_wyag
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , cmdargs
+    , directory
+    , filepath
+    , ini
+    , text
+    , transformers
+    , unordered-containers
+  default-language: Haskell2010
+
+executable wyag-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_wyag
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , cmdargs
+    , directory
+    , filepath
+    , ini
+    , text
+    , transformers
+    , unordered-containers
+    , wyag
+  default-language: Haskell2010
+
+test-suite wyag-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_wyag
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , cmdargs
+    , directory
+    , filepath
+    , ini
+    , text
+    , transformers
+    , unordered-containers
+    , wyag
+  default-language: Haskell2010
